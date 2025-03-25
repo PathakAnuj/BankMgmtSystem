@@ -1,0 +1,66 @@
+
+/* General Styles */
+body {
+font-family: Arial, sans-serif;
+text-align: center;
+}
+
+/* Navigation Bar */
+.menu {
+list-style-type: none;
+padding: 0;
+margin: 0;
+background: #333;
+display: flex;
+justify-content: center;
+}
+
+.menu li {
+position: relative;
+}
+
+.menu > li > a {
+display: block;
+padding: 15px 20px;
+text-decoration: none;
+color: white;
+background: #333;
+}
+
+.menu > li:hover > a {
+background: #444;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+list-style-type: none;
+position: absolute;
+top: 100%;
+left: 0;
+background: #444;
+padding: 0;
+margin: 0;
+display: none;
+width: 200px;
+}
+
+.dropdown-menu li {
+border-bottom: 1px solid #555;
+}
+
+.dropdown-menu li a {
+display: block;
+padding: 10px;
+color: white;
+text-decoration: none;
+}
+
+.dropdown-menu li a:hover {
+background: #555;
+}
+
+/* Show Dropdown on Hover */
+.dropdown:hover .dropdown-menu {
+display: block;
+}
+

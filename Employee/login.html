@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Login</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        form { width: 40%; margin: auto; background: #f4f4f4; padding: 20px; border-radius: 10px; }
+        label, input { display: block; margin: 10px 0; width: 100%; padding: 8px; }
+        button { background: blue; color: white; padding: 10px; border: none; cursor: pointer; }
+        .error { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h2>Employee Login</h2>
+    <form id="loginForm">
+        <label>Employee ID</label>
+        <input type="text" id="loginEmpId" required>
+
+        <label>Password</label>
+        <input type="password" id="loginPassword" required>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <p id="loginMessage"></p>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let empId = document.getElementById("loginEmpId").value;
+            let password = document.getElementById("loginPassword").value;
+
+            let employeeData = JSON.parse(localStorage.getItem("employee_" + empId));
+
+            if (employeeData && employeeData.password === password) {
+                alert("Login Successful!");
+                window.location.href = "dashboard.html";
+            } else {
+                document.getElementById("loginMessage").innerHTML = "<span class='error'>Invalid Employee ID or Password!</span>";
+            }
+        });
+    </script>
+
+</body>
+</html>

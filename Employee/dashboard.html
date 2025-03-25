@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- <link rel="stylesheet" href="../css/styles.css"> -->
+</head>
+<body>
+    <style>
+        /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+/* Navigation Bar */
+.menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background: #333;
+    display: flex;
+    justify-content: center;
+}
+
+.menu li {
+    position: relative;
+}
+
+.menu > li > a {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: white;
+    background: #333;
+}
+
+.menu > li:hover > a {
+    background: #444;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    list-style-type: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #444;
+    padding: 0;
+    margin: 0;
+    display: none;
+    width: 200px;
+}
+
+.dropdown-menu li {
+    border-bottom: 1px solid #555;
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.dropdown-menu li a:hover {
+    background: #555;
+}
+
+/* Show Dropdown on Hover */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+    </style>
+    <h2>Welcome to Dashboard</h2>
+    <nav>
+        <ul class="menu">
+            <li class="dropdown">
+                <a href="#">Manage Customers</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../Customer/AddCustomer.html">Add Customer</a></li>
+                    <li><a href="../Customer/EditCustomer.html">Edit Customer</a></li>
+                    <li><a href="../Customer/ViewCustomer.html">Show Customers</a></li>
+                    <li><a href="../Customer/DeleteCustomer.html">Delete Customer</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Transaction Processing</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../transactions/add.html">Add Transaction</a></li>
+                    <li><a href="../transactions/view.html">View Transactions</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Loan Management</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../loans/apply.html">Apply for Loan</a></li>
+                    <li><a href="../loans/update.html">Update Loan</a></li>
+                    <li><a href="../loans/cancel.html">Cancel Loan</a></li>
+                </ul>
+            </li>
+            <li><a href="../employee/login.html">Logout</a></li>
+        </ul>
+    </nav>
+</body>
+</html>
