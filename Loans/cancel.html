@@ -1,0 +1,11 @@
+<button onclick="deleteLoan()">Cancel Loan</button>
+
+<script>
+    function deleteLoan() {
+        let loanId = prompt("Enter Loan ID to delete:");
+        let loans = JSON.parse(localStorage.getItem("loans")) || [];
+        let updatedLoans = loans.filter(l => l.loanId !== loanId);
+        localStorage.setItem("loans", JSON.stringify(updatedLoans));
+        alert("Loan deleted successfully!");
+    }
+</script>

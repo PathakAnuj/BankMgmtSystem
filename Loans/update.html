@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Loan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px gray;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+        .message {
+            text-align: center;
+            color: green;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Update Loan</h2>
+        <label for="loanId">Enter Loan ID:</label>
+        <input type="text" id="loanId" required>
+        <button onclick="loadLoan()">Fetch Loan</button>
+
+        <form id="updateForm" style="display: none;">
+            <label for="loanAmount">Updated Loan Amount:</label>
+            <input type="number" id="loanAmount" required>
+
+            <label for="loanDuration">Updated Loan Duration (Years):</label>
+            <input type="number" id="loanDuration" required>
+
+            <button type="submit">Update</button>
+        </form>
+        <p class="message" id="updateMessage"></p>
+    </div>
+
+    <script>
+        function loadLoan() {
+            let loanId = document.getElementById("loanId").value;
+            let loans = JSON.parse(localStorage.getItem("loans")) || [];
+            let loan = loans.find(l => l.loanId === loanId);
+
+            if (loan) {
+                document.getElementById("updateForm").style.display = "block";
+                document.getElementById("loanAmount").value = loan.loanAmount;
+                document.getElementById("loanDuration").value = loan.loanDuration;
+            } else {
+                alert("Loan ID not found.");
+            }
+        }
+
+        document.getElementById("updateForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            let loanId = document.getElementById("loanId").value;
+            let loans = JSON.parse(localStorage.getItem("loans")) || [];
+
+            let loanIndex = loans.findIndex(l => l.loanId === loanId);
+            if (loanIndex !== -1) {
+                loans[loanIndex].loanAmount = document.getElementById("loanAmount").value;
+                loans[loanIndex].loanDuration = document.getElementById("loanDuration").value;
+                localStorage.setItem("loans", JSON.stringify(loans));
+                document.getElementById("updateMessage").innerText = "Loan updated successfully!";
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for Loan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px gray;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .message {
+            text-align: center;
+            color: green;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Apply for Loan</h2>
+        <form id="loanForm">
+            <label for="loanId">Loan ID:</label>
+            <input type="text" id="loanId" readonly>
+
+            <label for="customerSSN">Customer SSN ID:</label>
+            <input type="text" id="customerSSN" required>
+
+            <label for="customerName">Customer Name:</label>
+            <input type="text" id="customerName" required>
+
+            <label for="occupation">Occupation:</label>
+            <input type="text" id="occupation" required>
+
+            <label for="loanAmount">Loan Amount:</label>
+            <input type="number" id="loanAmount" required>
+
+            <label for="loanDuration">Loan Duration (Years):</label>
+            <input type="number" id="loanDuration" required>
+
+            <button type="submit">Submit</button>
+        </form>
+        <p class="message" id="successMessage"></p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("loanId").value = "LN" + Math.floor(1000000 + Math.random() * 9000000);
+
+            document.getElementById("loanForm").addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                let loan = {
+                    loanId: document.getElementById("loanId").value,
+                    customerSSN: document.getElementById("customerSSN").value,
+                    customerName: document.getElementById("customerName").value,
+                    occupation: document.getElementById("occupation").value,
+                    loanAmount: document.getElementById("loanAmount").value,
+                    loanDuration: document.getElementById("loanDuration").value
+                };
+
+                let loans = JSON.parse(localStorage.getItem("loans")) || [];
+                loans.push(loan);
+                localStorage.setItem("loans", JSON.stringify(loans));
+
+                document.getElementById("successMessage").innerText = "Loan application submitted successfully!";
+                setTimeout(() => { document.getElementById("successMessage").innerText = ""; }, 3000);
+                document.getElementById("loanForm").reset();
+                document.getElementById("loanId").value = "LN" + Math.floor(1000000 + Math.random() * 9000000);
+            });
+        });
+    </script>
+</body>
+</html>

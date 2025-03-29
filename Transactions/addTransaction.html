@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Transaction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px gray;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+        .message {
+            text-align: center;
+            color: green;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Add Transaction</h2>
+        <form id="transactionForm">
+            <label for="transactionId">Transaction ID:</label>
+            <input type="text" id="transactionId" readonly>
+
+            <label for="customerSSN">Customer SSN ID:</label>
+            <input type="text" id="customerSSN" required>
+
+            <label for="customerName">Customer Name:</label>
+            <input type="text" id="customerName" required>
+
+            <label for="accountId">Account ID:</label>
+            <input type="text" id="accountId" required>
+
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" required>
+
+            <label for="mode">Mode of Transaction:</label>
+            <select id="mode">
+                <option value="Credit">Credit</option>
+                <option value="Debit">Debit</option>
+            </select>
+
+            <button type="submit">Submit</button>
+        </form>
+        <p class="message" id="successMessage"></p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("transactionId").value = "TXN" + Math.floor(1000000 + Math.random() * 9000000);
+
+            document.getElementById("transactionForm").addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                let transaction = {
+                    transactionId: document.getElementById("transactionId").value,
+                    customerSSN: document.getElementById("customerSSN").value,
+                    customerName: document.getElementById("customerName").value,
+                    accountId: document.getElementById("accountId").value,
+                    amount: document.getElementById("amount").value,
+                    mode: document.getElementById("mode").value
+                };
+
+                let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+                transactions.push(transaction);
+                localStorage.setItem("transactions", JSON.stringify(transactions));
+
+                document.getElementById("successMessage").innerText = "Transaction added successfully!";
+                setTimeout(() => { document.getElementById("successMessage").innerText = ""; }, 3000);
+                document.getElementById("transactionForm").reset();
+                document.getElementById("transactionId").value = "TXN" + Math.floor(1000000 + Math.random() * 9000000);
+            });
+        });
+    </script>
+</body>
+</html>
